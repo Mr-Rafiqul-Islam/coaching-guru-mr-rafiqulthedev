@@ -10,7 +10,39 @@ import {
 import { SafeAreaView } from "react-native-safe-area-context";
 import colors from "../../constants/colors";
 import { router } from "expo-router";
+import { useState } from "react";
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { doc, setDoc } from "firebase/firestore";
+import { auth, db } from "../../config/firebaseConfig";
 const SignUp = () => {
+  const [form, setForm] = useState({
+    fullName: "",
+    email: "",
+    password: "",
+  });
+
+  const handleSignUp = () => {
+    if (!form.fullName || !form.email || !form.password) {
+      return alert("Please fill all the fields");
+    }
+    createUserWithEmailAndPassword(auth, form.email, form.password)
+      .then(async (response) => {
+        const user = response.user;
+        console.log(user);
+        await saveUser(user);
+      })
+      .catch((error) => console.log(error.message));
+  };
+
+  const saveUser = async (user) => {
+    await setDoc(doc(db, "users", user.email), {
+      uid: user.uid,
+      email: user.email,
+      fullName: form.fullName,
+      member: false,
+    });
+    console.log("user saved successfully");
+  };
   return (
     <SafeAreaView>
       <ScrollView contentContainerStyle={styles.scrollView}>
@@ -24,27 +56,32 @@ const SignUp = () => {
           placeholder="Enter Your Full Name"
           placeholderTextColor={colors.LIGHT_GRAY}
           style={styles.textInput}
+          onChangeText={(text) => setForm({ ...form, fullName: text })}
         />
         <TextInput
           placeholder="Enter Your Email"
           placeholderTextColor={colors.LIGHT_GRAY}
           style={styles.textInput}
           keyboardType="email-address"
+          onChangeText={(text) => setForm({ ...form, email: text })}
         />
         <TextInput
           placeholder="Enter Your Password"
           placeholderTextColor={colors.LIGHT_GRAY}
           style={styles.textInput}
           secureTextEntry
+          onChangeText={(text) => setForm({ ...form, password: text })}
         />
-        <TouchableOpacity onPress={() => {}} style={styles.button}>
+        <TouchableOpacity onPress={handleSignUp} style={styles.button}>
           <Text style={styles.buttonText}>Create Account</Text>
         </TouchableOpacity>
 
         <View style={{ flexDirection: "row", gap: 5, marginTop: 20 }}>
           <Text style={{ fontFamily: "outfit" }}>Already have an account?</Text>
           <TouchableOpacity onPress={() => router.push("/sign-in")}>
-            <Text style={{ color: colors.PRIMARY ,fontFamily: "outfit-bold"}}>Sign In</Text>
+            <Text style={{ color: colors.PRIMARY, fontFamily: "outfit-bold" }}>
+              Sign In
+            </Text>
           </TouchableOpacity>
         </View>
       </ScrollView>
