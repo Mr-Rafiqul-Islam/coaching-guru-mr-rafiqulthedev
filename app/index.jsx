@@ -9,6 +9,7 @@ import {
 import colors from "../constants/colors";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { StatusBar } from "expo-status-bar";
+import { router } from "expo-router";
 
 
 export default function Index() {
@@ -58,10 +59,11 @@ export default function Index() {
             with AI! 📚 🤖.
           </Text>
 
-          <TouchableOpacity style={styles.button}>
+          <TouchableOpacity onPress={()=> router.push("/sign-up")} style={styles.button}>
             <Text style={styles.buttonText}>Get Started</Text>
           </TouchableOpacity>
           <TouchableOpacity
+          onPress={()=> router.push("/sign-in")}
             style={[
               styles.button,
               {
