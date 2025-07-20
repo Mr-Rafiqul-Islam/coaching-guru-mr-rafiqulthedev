@@ -14,9 +14,14 @@ import { StatusBar } from "expo-status-bar";
 import Button from "../../components/common/Button";
 import { useState } from "react";
 import Prompt from "../../constants/Prompt";
-import generateTopicIdeas from "../../config/aiModel";
+import generateTopicIdeas ,{ generateCourseContent } from "../../config/aiModel";
+import { doc, setDoc } from "firebase/firestore";
+import { db } from "../../config/firebaseConfig";
+import { useAuthUser } from "../../context/UserContextProvider";
+import { router } from "expo-router";
 
 const AddCourse = () => {
+  const { userData } = useAuthUser();
   const [loading, setLoading] = useState(false);
   const [userInput, setUserInput] = useState("");
   const [generatedTopics, setGeneratedTopics] = useState([]);
@@ -64,9 +69,48 @@ const AddCourse = () => {
   };
 
 //   Used to generate course using AI Model
-const onGenerateCourse=()=>{
+// New handler for generating the full course
+    const onGenerateCourse = async () => {
+        setErrorMessage("");// Clear previous course data
 
-}
+        if (selectedTopics.length === 0) {
+            setErrorMessage("Please select at least one topic to generate a course.");
+            return;
+        }
+
+        setLoading(true);
+        const PROMPT = selectedTopics.join(", ") + Prompt.COURSE;
+        console.log("Course generation prompt:", PROMPT);
+
+        try {
+            const courseResult = await generateCourseContent(PROMPT); // This will be the object { courses: [...] } or null
+
+            // Check if courseResult is valid and contains the 'courses' array
+            if (courseResult && Array.isArray(courseResult.courses) && courseResult.courses.length > 0) {// Store the full object
+                console.log("Generated course:", courseResult.courses);
+
+                // Save each course to Firestore
+                for (const course of courseResult.courses) { // Use for...of for async operations in loop
+                    await setDoc(doc(db, "courses", Date.now().toString()), {
+                        ...course,
+                        createdOn: new Date(),
+                        createdBy: userData?.email,
+                    });
+                }
+                console.log("Courses saved successfully");
+                router.replace("/(tab)/home"); // Navigate after successful save
+            } else {
+                setErrorMessage("AI did not generate valid course content or it's empty. Please try again.");
+                console.error("AI generated invalid or empty course content:", courseResult);
+            }
+        } catch (error) {
+            console.error("Failed to generate or save course:", error);
+            setErrorMessage("Failed to generate or save course. " + error.message); // Display error message from catch
+        } finally {
+            setLoading(false);
+            Keyboard.dismiss();
+        }
+    };
   return (
     <SafeAreaView style={styles.mainContainer}>
       <ScrollView contentContainerStyle={{ flexGrow: 1, gap: 10 }} >
@@ -87,7 +131,7 @@ const onGenerateCourse=()=>{
         />
         {errorMessage ? (
           <Text style={styles.errorText}>{errorMessage}</Text>
-        ) : null}{" "}
+        ) : null}
         {/* Display error message */}
         <Button
           text="Generate Topic"
