@@ -10,11 +10,23 @@ import colors from "../constants/colors";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { StatusBar } from "expo-status-bar";
 import { router } from "expo-router";
-
+import { onAuthStateChanged } from "firebase/auth";
+import { auth, db } from "@/config/firebaseConfig";
+import { doc, getDoc } from "firebase/firestore";
+import { useAuthUser } from "@/context/UserContextProvider";
 
 export default function Index() {
+  const { setUserData } = useAuthUser();
+  onAuthStateChanged(auth, async (user) => {
+    if (user) {
+      const result = await getDoc(doc(db, "users", user?.email));
+      setUserData(result.data());
+      router.replace("/(tab)/home")
+    }
+    
+  });
   return (
-    <SafeAreaView style={{ height: '100%',  }}>
+    <SafeAreaView style={{ height: "100%" }}>
       <ScrollView
         style={{
           flex: 1,
@@ -59,11 +71,14 @@ export default function Index() {
             with AI! 📚 🤖.
           </Text>
 
-          <TouchableOpacity onPress={()=> router.push("/sign-up")} style={styles.button}>
+          <TouchableOpacity
+            onPress={() => router.push("/sign-up")}
+            style={styles.button}
+          >
             <Text style={styles.buttonText}>Get Started</Text>
           </TouchableOpacity>
           <TouchableOpacity
-          onPress={()=> router.push("/sign-in")}
+            onPress={() => router.push("/sign-in")}
             style={[
               styles.button,
               {

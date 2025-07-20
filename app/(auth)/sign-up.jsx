@@ -14,35 +14,47 @@ import { useState } from "react";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { doc, setDoc } from "firebase/firestore";
 import { auth, db } from "../../config/firebaseConfig";
+import { useAuthUser } from "../../context/UserContextProvider";
 const SignUp = () => {
   const [form, setForm] = useState({
     fullName: "",
     email: "",
     password: "",
   });
+  const { setUserData } = useAuthUser();
+  const [loading, setLoading] = useState(false);
 
   const handleSignUp = () => {
     if (!form.fullName || !form.email || !form.password) {
       return alert("Please fill all the fields");
     }
+    setLoading(true);
     createUserWithEmailAndPassword(auth, form.email, form.password)
       .then(async (response) => {
         const user = response.user;
-        console.log(user);
         await saveUser(user);
+        setLoading(false);
+        router.replace("/sign-in");
       })
-      .catch((error) => console.log(error.message));
+      .catch((error) => {
+        console.log(error.message);
+        Alert.alert("Error", error.message);
+        setLoading(false);
+      });
   };
 
   const saveUser = async (user) => {
-    await setDoc(doc(db, "users", user.email), {
+    const data = {
       uid: user.uid,
       email: user.email,
       fullName: form.fullName,
       member: false,
-    });
+    };
+    await setDoc(doc(db, "users", user.email), data);
+    setUserData(data);
     console.log("user saved successfully");
   };
+
   return (
     <SafeAreaView>
       <ScrollView contentContainerStyle={styles.scrollView}>
@@ -72,8 +84,19 @@ const SignUp = () => {
           secureTextEntry
           onChangeText={(text) => setForm({ ...form, password: text })}
         />
-        <TouchableOpacity onPress={handleSignUp} style={styles.button}>
-          <Text style={styles.buttonText}>Create Account</Text>
+        <TouchableOpacity
+          onPress={handleSignUp}
+          style={[
+            styles.button,
+            { backgroundColor: loading ? colors.GRAY : colors.PRIMARY },
+          ]}
+          disabled={loading}
+        >
+          {loading ? (
+            <ActivityIndicator color={colors.WHITE} size={"large"} />
+          ) : (
+            <Text style={styles.buttonText}>Create Account</Text>
+          )}
         </TouchableOpacity>
 
         <View style={{ flexDirection: "row", gap: 5, marginTop: 20 }}>
