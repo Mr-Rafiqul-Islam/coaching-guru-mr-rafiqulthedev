@@ -9,6 +9,7 @@ import { useAuthUser } from "../../context/UserContextProvider";
 import { collection, getDocs, query, where } from "firebase/firestore";
 import { db } from "../../config/firebaseConfig";
 import CourseList from "../../components/home/CourseList";
+import PractiseSection from "../../components/home/PractiseSection";
 
 const Home = () => {
   const [courseList, setCourseList] = useState([]);
@@ -40,7 +41,12 @@ const Home = () => {
       }}
     >
       <Header />
-      {courseList.length > 0 ?<CourseList courseList={courseList}/> : <NoCourse />}
+      {courseList.length > 0 ?(
+        <View>
+        <PractiseSection />
+        <CourseList courseList={courseList}/>
+        </View>
+        ) : <NoCourse />}
       <StatusBar backgroundColor="#ffffff" style="inverted" />
     </SafeAreaView>
   );

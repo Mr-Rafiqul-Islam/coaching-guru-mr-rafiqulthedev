@@ -9,7 +9,7 @@ export const PracticeOption =[
     },
     {
         name:'Question & Ans',
-        image:require('../assets/images/qa.png'),
+        image:require('../assets/images/notes.png'),
     },
 ]
 
