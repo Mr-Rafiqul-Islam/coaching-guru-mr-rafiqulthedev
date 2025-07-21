@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from "react-native";
+import { FlatList, StyleSheet, Text, View } from "react-native";
 import React, { useEffect, useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import Header from "../../components/home/Header";
@@ -10,6 +10,7 @@ import { collection, getDocs, query, where } from "firebase/firestore";
 import { db } from "../../config/firebaseConfig";
 import CourseList from "../../components/home/CourseList";
 import PractiseSection from "../../components/home/PractiseSection";
+import CourseProgress from "../../components/home/CourseProgress";
 
 const Home = () => {
   const [courseList, setCourseList] = useState([]);
@@ -32,23 +33,33 @@ const Home = () => {
     userData && GetCourseList();
   }, [userData]);
   return (
-    <SafeAreaView
-      style={{
-        flex: 1,
-        minHeight: "100%",
-        padding: 20,
-        backgroundColor: colors.WHITE,
-      }}
-    >
-      <Header />
-      {courseList.length > 0 ?(
-        <View>
-        <PractiseSection />
-        <CourseList courseList={courseList}/>
-        </View>
-        ) : <NoCourse />}
-      <StatusBar backgroundColor="#ffffff" style="inverted" />
-    </SafeAreaView>
+    <>
+      <FlatList
+        data={[]}
+        ListHeaderComponent={
+          <SafeAreaView
+            style={{
+              flex: 1,
+              minHeight: "100%",
+              padding: 20,
+              backgroundColor: colors.WHITE,
+            }}
+          >
+            <Header />
+            {courseList.length > 0 ? (
+              <View>
+                <CourseProgress courseList={courseList} />
+                <PractiseSection />
+                <CourseList courseList={courseList} />
+              </View>
+            ) : (
+              <NoCourse />
+            )}
+            <StatusBar backgroundColor="#ffffff" style="inverted" />
+          </SafeAreaView>
+        }
+      />
+    </>
   );
 };
 
