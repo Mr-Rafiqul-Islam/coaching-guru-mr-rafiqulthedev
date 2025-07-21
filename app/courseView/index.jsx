@@ -4,6 +4,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { StatusBar } from "expo-status-bar";
 import Intro from "../../components/course-view/Intro";
 import colors from "../../constants/colors";
+import Chapters from "../../components/course-view/Chapters";
 
 const CourseView = () => {
   const { courseParams } = useLocalSearchParams();
@@ -18,6 +19,7 @@ const CourseView = () => {
       }}
     >
         <Intro course={course}/>
+        <Chapters course={course}/>
       <StatusBar backgroundColor="#ffffff" style="inverted" />
     </SafeAreaView>
   );

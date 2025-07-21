@@ -1,4 +1,4 @@
-import { FlatList, Image, StyleSheet, Text, View } from "react-native";
+import { FlatList, Image, Text, View } from "react-native";
 import { PracticeOption } from "../../constants/option";
 import colors from "../../constants/colors";
 
@@ -6,7 +6,7 @@ const PractiseSection = () => {
   return (
     <View style={{ marginTop: 20 }}>
       <Text style={{ fontSize: 25, fontFamily: "outfit-bold" }}>Practice</Text>
-      <View style={{marginTop:10}}>
+      <View style={{ marginTop: 10 }}>
         <FlatList
           numColumns={3}
           data={PracticeOption}
@@ -21,9 +21,21 @@ const PractiseSection = () => {
             >
               <Image
                 source={item.image}
-                style={{ width: "100%", height: "100%", maxHeight: 160 ,borderRadius:15}}
+                style={{
+                  width: "100%",
+                  height: "100%",
+                  maxHeight: 160,
+                  borderRadius: 15,
+                }}
               />
-              <Text style={{position:"absolute",padding:15,color:colors.WHITE,fontFamily:"outfit" }}>
+              <Text
+                style={{
+                  position: "absolute",
+                  padding: 15,
+                  color: colors.WHITE,
+                  fontFamily: "outfit",
+                }}
+              >
                 {item.name}
               </Text>
             </View>
@@ -35,5 +47,3 @@ const PractiseSection = () => {
 };
 
 export default PractiseSection;
-
-const styles = StyleSheet.create({});
