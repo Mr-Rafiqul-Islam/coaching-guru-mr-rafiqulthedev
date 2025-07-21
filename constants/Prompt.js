@@ -11,7 +11,7 @@ export default {
     -User want to learn about the all topics
     -Create 2 Courses with Course Name, Description, and 3 Chapter in each course
     -Make sure to add chapters with all learning material course wise
-    -Add CourseBanner Image from ('/banner1.png', '/banner2.png', '/banner3.png', '/banner4.png', '/banner5.png', '/banner6.png')
+    -Add CourseBanner Image from this ['/banner1.png', '/banner2.png', '/banner3.png', '/banner4.png', '/banner5.png', '/banner6.png']
     -Explain the chapter content as detailed tutorial
     -Generate 5 Quizz, 10 Flashcard and 5 Questions answer
 

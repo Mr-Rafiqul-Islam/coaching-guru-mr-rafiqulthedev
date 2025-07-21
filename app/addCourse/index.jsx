@@ -113,7 +113,7 @@ const AddCourse = () => {
     };
   return (
     <SafeAreaView style={styles.mainContainer}>
-      <ScrollView contentContainerStyle={{ flexGrow: 1, gap: 10 }} >
+      <ScrollView contentContainerStyle={{ flexGrow: 1, gap: 10 }} showsVerticalScrollIndicator={false} >
         <Text style={styles.heading}>Create New Course</Text>
         <Text style={styles.subHeading}>What You Learn Today?</Text>
         <Text style={styles.desc}>
