@@ -1,6 +1,7 @@
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { useAuthUser } from "../../context/UserContextProvider";
 import Ionicons from "@expo/vector-icons/Ionicons";
+import colors from "../../constants/colors";
 
 const Header = () => {
   const { userData } = useAuthUser();
@@ -23,9 +24,11 @@ const styles = StyleSheet.create({
   heading: {
     fontSize: 25,
     fontFamily: "outfit-bold",
+    color:colors.WHITE
   },
   subHeading: {
     fontSize: 17,
     fontFamily: "outfit",
+    color:colors.WHITE
   },
 });

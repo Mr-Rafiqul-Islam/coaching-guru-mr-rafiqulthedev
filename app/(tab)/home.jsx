@@ -1,4 +1,11 @@
-import { FlatList, Pressable, StyleSheet, Text, View } from "react-native";
+import {
+  FlatList,
+  Image,
+  Pressable,
+  StyleSheet,
+  Text,
+  View,
+} from "react-native";
 import React, { useEffect, useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import Header from "../../components/home/Header";
@@ -40,45 +47,56 @@ const Home = () => {
   return (
     <>
       <FlatList
-        data={[]} 
+        data={[]}
         onRefresh={() => GetCourseList()}
         refreshing={loading}
         ListHeaderComponent={
-          <SafeAreaView
-            style={{
-              flex: 1,
-              minHeight: "100%",
-              padding: 20,
-              backgroundColor: colors.WHITE,
-            }}
-          >
-            <Header />
-            <Pressable
-              onPress={() => router.push("/addCourse")}
+          <View style={{ flex: 1, backgroundColor: colors.WHITE , minHeight: "100%"}}>
+            <Image
+              source={require("../../assets/images/wave.png")}
               style={{
-                marginTop: 20,
-                flexDirection: "row",
-                alignItems: "center",
-                gap: 10,
+                position: "absolute",
+                top: 0,
+                left: 0,
+                width: "100%",
+                height: 700,
+              }}
+            />
+            <SafeAreaView
+              style={{
+                flex: 1,
+                minHeight: "100%",
+                padding: 20,
               }}
             >
-              <Ionicons name="add-circle-outline" size={32} color="black" />
-              <Text style={{ fontSize: 20, fontFamily: "outfit-bold" }}>
-                Add Course
-              </Text>
-            </Pressable>
-              
-            {courseList.length > 0 ? (
-              <View>
-                <CourseProgress courseList={courseList} />
-                <PractiseSection />
-                <CourseList courseList={courseList} />
-              </View>
-            ) : (
-              <NoCourse />
-            )}
-            <StatusBar backgroundColor="#ffffff" style="inverted" />
-          </SafeAreaView>
+              <Header />
+              <Pressable
+                onPress={() => router.push("/addCourse")}
+                style={{
+                  marginTop: 20,
+                  flexDirection: "row",
+                  alignItems: "center",
+                  gap: 10,
+                }}
+              >
+                <Ionicons name="add-circle-outline" size={32} color="black" />
+                <Text style={{ fontSize: 20, fontFamily: "outfit-bold" }}>
+                  Add Course
+                </Text>
+              </Pressable>
+
+              {courseList.length > 0 ? (
+                <View>
+                  <CourseProgress courseList={courseList} />
+                  <PractiseSection />
+                  <CourseList courseList={courseList} />
+                </View>
+              ) : (
+                <NoCourse />
+              )}
+              <StatusBar backgroundColor="#ffffff" style="inverted" />
+            </SafeAreaView>
+          </View>
         }
       />
     </>

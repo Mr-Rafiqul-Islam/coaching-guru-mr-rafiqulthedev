@@ -28,7 +28,7 @@ const CourseProgress = ({ courseList }) => {
               />
 
               <View>
-                <Text style={{ fontFamily: "outfit-bold"}} numberOfLines={2}>
+                <Text style={{ fontFamily: "outfit-bold",}} numberOfLines={1}>
                   {item?.courseTitle}
                 </Text>
                 <Text style={{ fontFamily: "outfit", margingTop: 5 }}>
@@ -38,7 +38,7 @@ const CourseProgress = ({ courseList }) => {
             </View>
             <View style={{ marginTop: 10 }}>
 
-            <Progress.Bar progress={0} width={220} />
+            <Progress.Bar progress={1/3} width={220} />
             <Text style={{ fontFamily: "outfit", marginTop: 5 }}>
                 3 Out of 5 Chapter Completed
             </Text>
