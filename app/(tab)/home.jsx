@@ -1,4 +1,4 @@
-import { FlatList, StyleSheet, Text, View } from "react-native";
+import { FlatList, Pressable, StyleSheet, Text, View } from "react-native";
 import React, { useEffect, useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import Header from "../../components/home/Header";
@@ -11,6 +11,8 @@ import { db } from "../../config/firebaseConfig";
 import CourseList from "../../components/home/CourseList";
 import PractiseSection from "../../components/home/PractiseSection";
 import CourseProgress from "../../components/home/CourseProgress";
+import { Ionicons } from "@expo/vector-icons";
+import { router } from "expo-router";
 
 const Home = () => {
   const [courseList, setCourseList] = useState([]);
@@ -46,6 +48,21 @@ const Home = () => {
             }}
           >
             <Header />
+            <Pressable
+              onPress={() => router.push("/addCourse")}
+              style={{
+                marginTop: 20,
+                flexDirection: "row",
+                alignItems: "center",
+                gap: 10,
+              }}
+            >
+              <Ionicons name="add-circle-outline" size={32} color="black" />
+              <Text style={{ fontSize: 20, fontFamily: "outfit-bold" }}>
+                Add Course
+              </Text>
+            </Pressable>
+              
             {courseList.length > 0 ? (
               <View>
                 <CourseProgress courseList={courseList} />
