@@ -16,9 +16,11 @@ import { router } from "expo-router";
 
 const Home = () => {
   const [courseList, setCourseList] = useState([]);
+  const [loading, setLoading] = useState(false);
   const { userData } = useAuthUser();
 
   const GetCourseList = async () => {
+    setLoading(true);
     setCourseList([]);
     const q = query(
       collection(db, "courses"),
@@ -29,6 +31,7 @@ const Home = () => {
       console.log(doc.id, " => ", doc.data());
       setCourseList((prev) => [...prev, doc.data()]);
     });
+    setLoading(false);
   };
 
   useEffect(() => {
@@ -37,7 +40,9 @@ const Home = () => {
   return (
     <>
       <FlatList
-        data={[]}
+        data={[]} 
+        onRefresh={() => GetCourseList()}
+        refreshing={loading}
         ListHeaderComponent={
           <SafeAreaView
             style={{
