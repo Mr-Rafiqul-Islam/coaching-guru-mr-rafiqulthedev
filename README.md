@@ -1,6 +1,10 @@
-# Welcome to your Expo app 👋
+# 🎓 Coaching Guru - A Learning App
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+A comprehensive mobile application built with React Native and Firebase, designed to provide an engaging learning experience with course exploration, progress tracking, and content creation features.
+
+## Demo Credentials for testing app
+   email: test@mail.com
+   pass: asdfghjkl
 
 ## Get started
 
