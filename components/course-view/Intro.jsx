@@ -5,7 +5,7 @@ import colors from "../../constants/colors";
 import Button from "../common/Button";
 import { router } from "expo-router";
 
-const Intro = ({ course }) => {
+const Intro = ({ course, enroll }) => {
   return (
     <View>
       <Image
@@ -44,7 +44,11 @@ const Intro = ({ course }) => {
         >
           {course?.description}
         </Text>
-        <Button text="Start Now" onPress={() => console.log("Start Now")} />
+        {enroll === "true" ? (
+          <Button text={"Enroll Now"} onPress={() => console.log("Continue")} />
+        ) : (
+          <Button text="Start Now" onPress={() => console.log("Start Now")} />
+        )}
       </View>
       <Pressable
         onPress={() => router.back()}

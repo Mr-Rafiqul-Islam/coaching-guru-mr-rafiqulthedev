@@ -18,7 +18,7 @@ import { imageAssets } from "../../constants/option";
 const { width } = Dimensions.get('window');
 const ITEM_WIDTH = width * 0.6; // For example, 60% of screen width
 
-const CourseList = ({ courseList, heading = "Courses" }) => {
+const CourseList = ({ courseList, heading = "Courses",enroll=false }) => {
   // Defensive check for courseList
   if (!courseList || courseList.length === 0) {
     return (
@@ -45,7 +45,7 @@ const CourseList = ({ courseList, heading = "Courses" }) => {
             onPress={() =>
               router.push({
                 pathname: "/courseView",
-                params: { courseParams: JSON.stringify(item) },
+                params: { courseParams: JSON.stringify(item), enroll },
               })
             }
             style={styles.courseCard}
@@ -77,7 +77,6 @@ export default CourseList;
 
 const styles = StyleSheet.create({
   container: {
-    paddingLeft: 25, 
     flex:1// Only pad left, let cards handle horizontal spacing
   },
   heading: {

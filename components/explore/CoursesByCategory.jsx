@@ -50,7 +50,7 @@ const CoursesByCategory = ({ category }) => {
     } finally {
       setLoading(false);
     }
-  }, [category]); // Depend on category, so it refetches when category changes
+  }, [category]); 
 
   useEffect(() => {
     fetchCourseListByCategory();
@@ -64,7 +64,7 @@ const CoursesByCategory = ({ category }) => {
         <Text style={styles.errorText}>{error}</Text>
       ) : courseList.length > 0 && (
         // Pass the actual heading here, which is the category name
-        <CourseList courseList={courseList} heading={category} />
+        <CourseList courseList={courseList} heading={category} enroll={true}/>
       )}
     </View>
   );
@@ -76,6 +76,7 @@ const styles = StyleSheet.create({
   container: { 
     justifyContent: 'center',
     alignItems: 'center',
+    paddingLeft: 20
   },
   loadingIndicator: {
     marginTop: 50,

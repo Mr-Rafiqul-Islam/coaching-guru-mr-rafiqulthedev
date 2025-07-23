@@ -7,7 +7,7 @@ import colors from "../../constants/colors";
 import Chapters from "../../components/course-view/Chapters";
 
 const CourseView = () => {
-  const { courseParams } = useLocalSearchParams();
+  const { courseParams , enroll} = useLocalSearchParams();
   const course = JSON.parse(courseParams);
 
   return (
@@ -21,7 +21,7 @@ const CourseView = () => {
             backgroundColor: colors.WHITE,
           }}
         >
-          <Intro course={course} />
+          <Intro course={course} enroll={enroll} />
           <Chapters course={course} />
           <StatusBar backgroundColor="#ffffff" style="inverted" />
         </SafeAreaView>
