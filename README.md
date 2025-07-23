@@ -2,7 +2,7 @@
 
 A comprehensive mobile application built with React Native and Firebase, designed to provide an engaging learning experience with course exploration, progress tracking, and content creation features.
 ## Preview
-<img src="assets/preview.jpeg" width="360">  
+<img src="assets/preview.jpeg" width="320">  
 
 --
 
