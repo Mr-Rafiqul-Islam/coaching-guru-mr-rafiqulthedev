@@ -20,7 +20,7 @@ const Profile = () => {
 
   const onMenuClick = (menu) => {
     console.log(menu);
-    if (menu.name == "Logout") {
+    if (menu.name === "Logout") {
       signOut(auth)
         .then(() => {
           setUserData(null);

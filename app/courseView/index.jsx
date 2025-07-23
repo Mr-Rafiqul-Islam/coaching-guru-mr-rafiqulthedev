@@ -1,5 +1,5 @@
 import { useLocalSearchParams } from "expo-router";
-import { FlatList, Image, StyleSheet, Text, View } from "react-native";
+import { FlatList,  } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { StatusBar } from "expo-status-bar";
 import Intro from "../../components/course-view/Intro";
@@ -31,5 +31,3 @@ const CourseView = () => {
 };
 
 export default CourseView;
-
-const styles = StyleSheet.create({});

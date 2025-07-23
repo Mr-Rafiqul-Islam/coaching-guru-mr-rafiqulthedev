@@ -49,6 +49,5 @@ const styles = StyleSheet.create({
     backgroundColor: colors.BG_GRAY,
     borderRadius: 15,
     margin: 6,
-    borderRadius: 15,
   },
 });

@@ -97,7 +97,7 @@ const SignIn = () => {
         </TouchableOpacity>
 
         <View style={{ flexDirection: "row", gap: 5, marginTop: 20 }}>
-          <Text style={{ fontFamily: "outfit" }}>Don't have an account?</Text>
+          <Text style={{ fontFamily: "outfit" }}>Don&apos;t have an account?</Text>
           <TouchableOpacity onPress={() => router.push("/sign-up")}>
             <Text style={{ color: colors.PRIMARY, fontFamily: "outfit-bold" }}>
               Sign Up

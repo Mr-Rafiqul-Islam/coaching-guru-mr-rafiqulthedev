@@ -10,7 +10,7 @@ const NoCourse = () => {
         style={{ width: 200, height: 200 }}
         resizeMode="contain"
       />
-      <Text style={styles.title}>You Don't Have Any Course</Text>
+      <Text style={styles.title}>You Don&apos;t Have Any Course</Text>
       <Button text="+ Create New Course" onPress={() => router.push("/addCourse")}/>
       <Button text="Explore Existing Courses" type="outline"/>
     </View>

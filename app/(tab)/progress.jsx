@@ -1,6 +1,5 @@
 import React, { useEffect, useState, useCallback } from "react"; 
-import { Image, StyleSheet, Text, TouchableOpacity, View, ActivityIndicator } from "react-native"; 
-import { FlatList } from "react-native";
+import { Image, StyleSheet, Text, TouchableOpacity, View, ActivityIndicator ,FlatList} from "react-native"; 
 import { useAuthUser } from "../../context/UserContextProvider";
 import { collection, getDocs, query, where } from "firebase/firestore";
 import { db } from "../../config/firebaseConfig";

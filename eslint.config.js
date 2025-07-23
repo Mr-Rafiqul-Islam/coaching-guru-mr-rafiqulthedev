@@ -9,7 +9,7 @@ module.exports = defineConfig([
   },
   {
     rules: {
-      "no-unused-vars": "false",
+      
     },
   },
 ]);
