@@ -91,10 +91,12 @@ const AddCourse = () => {
 
                 // Save each course to Firestore
                 for (const course of courseResult.courses) { // Use for...of for async operations in loop
-                    await setDoc(doc(db, "courses", Date.now().toString()), {
+                  const docId= Date.now().toString();
+                    await setDoc(doc(db, "courses", docId), {
                         ...course,
                         createdOn: new Date(),
                         createdBy: userData?.email,
+                        docId
                     });
                 }
                 console.log("Courses saved successfully");
