@@ -22,7 +22,7 @@ const Progress = () => {
     );
     const querySnapshot = await getDocs(q);
     querySnapshot.forEach((doc) => {
-      console.log(doc.id, " => ", doc.data());
+      // console.log(doc.id, " => ", doc.data());
       setCourseList((prev) => [...prev, doc.data()]);
     });
     setLoading(false);
@@ -67,14 +67,15 @@ const Progress = () => {
           refreshing={loading}
           contentContainerStyle={{ marginTop: 20 }}
           renderItem={({ item, index }) => (
-            <TouchableOpacity  
-            onPress={() =>
-                          router.push({
-                            pathname: "/courseView",
-                            params: { courseParams: JSON.stringify(item) },
-                          })
-                        }
-            key={index}>
+            <TouchableOpacity
+              onPress={() =>
+                router.push({
+                  pathname: "/courseView",
+                  params: { courseParams: JSON.stringify(item) },
+                })
+              }
+              key={index}
+            >
               <CourseProgressCard item={item} containerWidth={"96%"} />
             </TouchableOpacity>
           )}

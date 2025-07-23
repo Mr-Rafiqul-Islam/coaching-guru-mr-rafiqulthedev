@@ -14,6 +14,7 @@ export default {
     -Add CourseBanner Image from this ['/banner1.png', '/banner2.png', '/banner3.png', '/banner4.png', '/banner5.png', '/banner6.png']
     -Explain the chapter content as detailed tutorial
     -Generate 5 Quizz, 10 Flashcard and 5 Questions answer
+    -Tag each course to one of the category form :["Tech & Coding", "Business & Finance", "Health & Fitness", "Science & Engineering", "Arts & Creativity"]
 
     -Output in JSON Format only
     -  "courses": [
@@ -21,6 +22,7 @@ export default {
         "courseTitle":'<Intro to Python>',
         "description": '',
         "banner_image": "/banner1.png",
+        "category":'',
         "chapters": [
             {
                 chapterName: '',
