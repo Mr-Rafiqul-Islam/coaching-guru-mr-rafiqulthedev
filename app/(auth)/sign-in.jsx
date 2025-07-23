@@ -37,6 +37,7 @@ const SignIn = () => {
         setUserData(result);
         setLoading(false);
         router.replace("/home");
+        Alert.alert("Success", "Login successfully");
       })
       .catch((error) => {
         console.log(error.message);

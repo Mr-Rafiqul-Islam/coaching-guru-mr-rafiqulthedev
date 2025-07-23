@@ -37,6 +37,7 @@ const SignUp = () => {
         await saveUser(user);
         setLoading(false);
         router.replace("/sign-in");
+        Alert.alert("Success", "Resgistration successfully");
       })
       .catch((error) => {
         console.log(error.message);
