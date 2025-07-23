@@ -1,5 +1,4 @@
-// components/home/CourseList.jsx
-import React from 'react'; // Always import React
+import React from 'react';
 import {
   FlatList,
   Image,

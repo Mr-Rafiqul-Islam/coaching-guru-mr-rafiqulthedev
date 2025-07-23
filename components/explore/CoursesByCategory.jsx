@@ -1,15 +1,14 @@
-// components/explore/CoursesByCategory.jsx
-import React, { useEffect, useState, useCallback } from "react"; // Import React and useCallback
+import React, { useEffect, useState, useCallback } from "react"; 
 import { collection, getDocs, orderBy, query, where } from "firebase/firestore";
-import { View, Text, ActivityIndicator, StyleSheet } from "react-native"; // Import StyleSheet
-import { db } from "../../config/firebaseConfig"; // Ensure this path is correct
-import colors from "../../constants/colors"; // Assuming you have a colors constant
+import { View, Text, ActivityIndicator, StyleSheet } from "react-native"; 
+import { db } from "../../config/firebaseConfig";
+import colors from "../../constants/colors";
 
 import CourseList from "../home/CourseList";
 
 const CoursesByCategory = ({ category }) => {
   const [courseList, setCourseList] = useState([]);
-  const [loading, setLoading] = useState(true); // Start loading as true
+  const [loading, setLoading] = useState(true); 
   const [error, setError] = useState(null); // State for error handling
 
   // Use useCallback to memoize the fetch function, preventing unnecessary re-creations
@@ -74,9 +73,9 @@ const CoursesByCategory = ({ category }) => {
 export default CoursesByCategory;
 
 const styles = StyleSheet.create({
-  container: { // Ensure container has some height even if empty
+  container: { 
     justifyContent: 'center',
-    alignItems: 'center',// Add some bottom padding between sections
+    alignItems: 'center',
   },
   loadingIndicator: {
     marginTop: 50,
