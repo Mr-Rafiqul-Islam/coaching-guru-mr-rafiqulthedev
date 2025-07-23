@@ -1,9 +1,12 @@
 # 🎓 Coaching Guru - A Learning App
 
 A comprehensive mobile application built with React Native and Firebase, designed to provide an engaging learning experience with course exploration, progress tracking, and content creation features.
+## Preview
 
+![Coacging Guru](/assets/preview.jpeg) 
 ## Demo Credentials for testing app
    email: test@mail.com
+   
    pass: asdfghjkl
 
 ## Get started
