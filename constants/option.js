@@ -29,3 +29,31 @@ export const courseCategory = [
   "Science & Engineering",
   "Arts & Creativity",
 ];
+
+export const profileMenu = [
+  {
+    name: "Add Course",
+    icon: "add-outline", //Iconinc Icon
+    path: "/addCourse",
+  },
+  {
+    name: "My Course",
+    icon: "book",
+    path: "/home",
+  },
+  {
+    name: "Course Progress",
+    icon: "analytics-outline",
+    path: "/progress",
+  },
+  {
+    name: "My Subscription",
+    icon: "shield-checkmark",
+    path: "/home",
+  },
+  {
+    name: "Logout",
+    icon: "log-out",
+    path: "/sign-in",
+  },
+];
