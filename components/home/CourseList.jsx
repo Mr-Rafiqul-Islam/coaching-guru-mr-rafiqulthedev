@@ -39,7 +39,7 @@ const CourseList = ({ courseList, heading = "Courses",enroll=false }) => {
         data={courseList}
         horizontal={true}
         showsHorizontalScrollIndicator={false}
-        keyExtractor={(item, index) => item.id || index.toString()} // Use a unique ID if available, otherwise index
+        keyExtractor={(item, index) => item.docId + index.toString()} // Use a unique ID if available, otherwise index
         renderItem={({ item }) => ( // No need for index if not used directly
           <TouchableOpacity
             onPress={() =>

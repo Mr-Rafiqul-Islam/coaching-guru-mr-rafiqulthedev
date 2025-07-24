@@ -80,7 +80,7 @@ const Progress = () => {
             onRefresh={GetCourseList} // Use the memoized function here
             refreshing={loading}
             contentContainerStyle={styles.flatListContentContainer}
-            keyExtractor={(item,index) => item?.docId+index} // Use item.id as key if available
+            keyExtractor={(item,index) => item?.docId+index.toString()} // Use item.id as key if available
             renderItem={({ item }) => (
               <TouchableOpacity
                 onPress={() =>
