@@ -1,11 +1,35 @@
-import { Image, Pressable, Text, View } from "react-native";
+import { Alert, Image, Pressable, Text, View } from "react-native";
 import { imageAssets } from "../../constants/option";
 import { Ionicons } from "@expo/vector-icons";
 import colors from "../../constants/colors";
 import Button from "../common/Button";
 import { router } from "expo-router";
+import { doc, setDoc } from "firebase/firestore";
+import { db } from "../../config/firebaseConfig";
+import { useAuthUser } from "../../context/UserContextProvider";
+import { useState } from "react";
 
 const Intro = ({ course, enroll }) => {
+  const { userData } = useAuthUser();
+  const [loading, setLoading] = useState(false);
+  const onEnrollCourse = async () => {
+    setLoading(true);
+    console.log("Enroll Now");
+    const docId = Date.now().toString();
+    const data = {
+      ...course,
+      createdBy: userData?.email,
+      createdOn: new Date(),
+      enrolled: true,
+    };
+    await setDoc(doc(db, "courses", docId), data);
+    router.replace({
+      pathname: `/courseView/${docId}`,
+      params: { enroll: false, courseParams: JSON.stringify(data) },
+    });
+    setLoading(false);
+    Alert.alert("Success", "Course Enrolled Successfully");
+  };
   return (
     <View>
       <Image
@@ -45,7 +69,11 @@ const Intro = ({ course, enroll }) => {
           {course?.description}
         </Text>
         {enroll === "true" ? (
-          <Button text={"Enroll Now"} onPress={() => console.log("Continue")} />
+          <Button
+            text={"Enroll Now"}
+            loading={loading}
+            onPress={onEnrollCourse}
+          />
         ) : (
           <Button text="Start Now" onPress={() => console.log("Start Now")} />
         )}

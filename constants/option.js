@@ -20,6 +20,7 @@ export const imageAssets = {
   "/banner4.png": require("../assets/images/banner4.png"),
   "/banner5.png": require("../assets/images/banner5.png"),
   "/banner6.png": require("../assets/images/banner6.png"),
+  "default_course_banner": require("../assets/images/banner6.png"),
 };
 
 export const courseCategory = [
